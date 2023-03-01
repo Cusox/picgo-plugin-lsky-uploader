@@ -1,0 +1,32 @@
+{
+  "name": "picgo-plugin-lsky-uploader",
+  "version": "1.0.0",
+  "description": "lskypro 图床",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/lsilencej/picgo-plugin-lsky",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch": "npm version patch && git push origin master && git push origin --tags",
+    "minor": "npm version minor && git push origin master && git push origin --tags",
+    "major": "npm version major && git push origin master && git push origin --tags"
+  },
+  "keywords": [
+    "picgo",
+    "picgo-gui-plugin",
+    "picgo-plugin",
+    "lsky",
+    "lskypro"
+  ],
+  "author": "lsilencej",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.1.0"
+  }
+}
