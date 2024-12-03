@@ -19,6 +19,7 @@ const handle = async (ctx) => {
 	}
 	const Url = userConfig.Url
 	const Token = userConfig.Token
+	const strategyId = userConfig.strategyId
 
 	const imgList = ctx.output
 	for (let i in imgList) {
@@ -26,7 +27,7 @@ const handle = async (ctx) => {
 		if (!image && imgList[i].base64Image) {
 			image = Buffer.from(imgList[i].base64Image, 'base64')
 		}
-		const postConfig = postOptions(Url, Token, imgList[i].fileName, image)
+		const postConfig = postOptions(Url, Token, imgList[i].fileName, image, strategyId)
 		let body = await ctx.request(postConfig)
 		body = JSON.parse(body)
 		if (body.status) {
@@ -44,7 +45,7 @@ const handle = async (ctx) => {
 	return ctx
 }
 
-const postOptions = (Url, Token, fileName, image) => {
+const postOptions = (Url, Token, fileName, image, strategyId) => {
 	return {
 		method: 'POST',
 		url: Url + `/api/v1/upload`,
@@ -60,8 +61,10 @@ const postOptions = (Url, Token, fileName, image) => {
 				options: {
 					filename: fileName
 				}
+				
 			},
-			ssl: 'true'
+			ssl: 'true',
+			strategy_id: strategyId
 		}
 	}
 }
@@ -86,6 +89,15 @@ const config = ctx => {
 			required: true,
 			message: '获取的Token',
 			alias: '获取的Token'
+		},
+		{
+			name: 'strategyId',
+			type: 'input',
+			default: userConfig.strategyId || '', 
+			required: false, 
+			message: '可选的策略ID',
+			alias: '策略ID'
 		}
+
 	]
 }
